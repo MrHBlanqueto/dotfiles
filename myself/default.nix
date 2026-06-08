@@ -37,6 +37,7 @@ home = {
       twitter-color-emoji
       nerd-fonts.ubuntu-sans
       nerd-fonts.ubuntu-mono
+      nerd-fonts.fira-code
 
       # x86_64
       # onlyoffice-desktopeditors
@@ -49,8 +50,10 @@ home = {
 
     git = {
       enable = true;
-      userName  = "HBlanqueto";
-      userEmail = "mc4w6wmkrv@privaterelay.appleid.com";
+      settings = {
+        user.email = "mc4w6wmkrv@privaterelay.appleid.com";
+        user.name = "MrHBlanqueto";
+      };
     };
 
     bat = {
@@ -74,10 +77,14 @@ home = {
       interactiveShellInit = ''set -g fish_greeting ""'';
 
       shellAliases = {
+        delgen = "sudo nix-env --delete-generations old && sudo nix-store --gc";
         nix-update = "sudo nixos-rebuild switch";
-        flake-update = "sudo nixos-rebuild switch --flake .#NixOS";
+        flake-update-rb = "sudo nixos-rebuild boot --flake .#NixOS --impure";
+        flake-update-sw = "sudo nixos-rebuild switch --flake .#NixOS --impure";
         g = "git";
         c = "clear";
+
+
         ls = "eza --color=auto --icons";
         l = "ls -l";
         la = "ls -a";
@@ -88,7 +95,7 @@ home = {
 
     starship = {
       enable = true;
-      settings = import ./config/starship.nix;
+      #settings = import ./config/starship.nix;
     };
 
       home-manager = {

@@ -6,8 +6,15 @@
     format = "$symbol [|](bold bright-black) ";
   };
 
-  format = "$all";
+# El truco ''$ evita que Nix crasheé y le pasa la sintaxis correcta a Starship
+  format = "[](bg:#3B4B58 fg:#3B4B58)[ uwu ](bg:#3B4B58 fg:#9DFAAA)[](fg:#3B4B58)[ $ ](bold yellow)$directory$git_branch";
   add_newline = false;
+
+  custom.uwu_block = {
+    command = "echo ' uwu '"; 
+    style = "bg:#3B4B58 fg:#9DFAAA";
+    when = "true";
+  };
 
   hostname = {
     ssh_only = true;

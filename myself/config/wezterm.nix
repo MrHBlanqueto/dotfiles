@@ -61,7 +61,7 @@
 
     colors = {
       foreground = "#C6CDD5",
-      background = "#060a11",
+      background = "#1f2428",
       cursor_bg = "#C6CDD5",
       cursor_fg = "#C6CDD5",
       cursor_border = "#C6CDD5",

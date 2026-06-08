@@ -4,6 +4,7 @@
   inputs = {
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     home.url = "github:nix-community/home-manager";
+    impermanence.url = "github:nix-community/impermanence";
 
     mac-style.url = "github:SergioRibera/s4rchiso-plymouth-theme";
 
@@ -14,6 +15,7 @@
     self, 
     nixpkgs, 
     home,
+    impermanence,
     ... 
   }@inputs:
   with nixpkgs.lib;

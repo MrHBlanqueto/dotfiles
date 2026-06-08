@@ -12,31 +12,44 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/111caa5b-1c7c-43f3-8457-193066989aa9";
+    { device = "/dev/disk/by-uuid/5a387e47-22ae-4e1d-81da-b9ac913a48af";
       fsType = "btrfs";
+      options = [ "subvol=@rootfs" "noatime" "compress=zstd" "space_cache=v2" ];
     };
 
   fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/111caa5b-1c7c-43f3-8457-193066989aa9";
+    { device = "/dev/disk/by-uuid/5a387e47-22ae-4e1d-81da-b9ac913a48af";
       fsType = "btrfs";
-      options = [ "subvol=home" ];
+      options = [ "subvol=@home" "noatime" "compress=zstd" "space_cache=v2" ];
     };
 
   fileSystems."/nix" =
-    { device = "/dev/disk/by-uuid/111caa5b-1c7c-43f3-8457-193066989aa9";
+    { device = "/dev/disk/by-uuid/5a387e47-22ae-4e1d-81da-b9ac913a48af";
       fsType = "btrfs";
-      options = [ "subvol=nix" ];
+      options = [ "subvol=@nix" "noatime" "compress=zstd" "space_cache=v2" ];
+    };
+
+  fileSystems."/persist" =
+    { device = "/dev/disk/by-uuid/5a387e47-22ae-4e1d-81da-b9ac913a48af";
+      fsType = "btrfs";
+      options = [ "subvol=@persist" "noatime" "compress=zstd" "space_cache=v2" ];
+      neededForBoot = true;
+    };
+
+  fileSystems."/var/log" =
+    { device = "/dev/disk/by-uuid/5a387e47-22ae-4e1d-81da-b9ac913a48af";
+      fsType = "btrfs";
+      options = [ "subvol=@log" "noatime" "compress=zstd" "space_cache=v2" ];
+      neededForBoot = true;
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/505D-EDB9";
+    { device = "/dev/disk/by-uuid/24A9-14F0";
       fsType = "vfat";
-      options = [ "fmask=0077" "dmask=0077" ];
+      options = [ "fmask=0022" "dmask=0022" ];
     };
 
-  swapDevices =
-    [ { device = "/dev/disk/by-uuid/964289b9-dd0c-401b-8b10-4f077909eb0d"; }
-    ];
+  swapDevices = [ ];
 
   nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
 }

@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports =
@@ -64,16 +64,72 @@
 
   programs.fish.enable = true;
 
+  boot.initrd.systemd.initrdBin = with pkgs; [ 
+      coreutils 
+      btrfs-progs 
+      findutils
+  ];
+
+  # 2. O serviço de Rollback com script simplificado para Systemd
+  boot.initrd.systemd.services.rollback = {
+    description = "Limpieza de la raiz efimera de Btrfs";
+    wantedBy = [ "initrd.target" ];
+    before = [ "sysroot.mount" ];
+    unitConfig.DefaultDependencies = "no";
+    serviceConfig.Type = "oneshot";
+    script = ''
+      mkdir -p /btrfs_tmp
+      mount /dev/vda2 /btrfs_tmp
+
+      # Se o subvolume @rootfs atual existe, movemos para old_roots
+      if [ -e /btrfs_tmp/@rootfs ]; then
+          mkdir -p /btrfs_tmp/old_roots
+          timestamp=$(date "+%Y-%m-%d_%H:%M:%S")
+          mv /btrfs_tmp/@rootfs /btrfs_tmp/old_roots/$timestamp
+      fi
+
+      # Limpeza rápida: deleta subvolumes em old_roots com mais de 30 dias
+      # Usamos uma estrutura simplificada sem loops complexos de find para evitar falhas de sintaxe
+      mkdir -p /btrfs_tmp/old_roots
+      find /btrfs_tmp/old_roots/ -maxdepth 1 -mtime +30 -exec btrfs subvolume delete {} \; 2>/dev/null || true
+
+      # Restauramos o seu snapshot limpo
+      btrfs subvolume snapshot /btrfs_tmp/rootfs-blank /btrfs_tmp/@rootfs
+      
+      umount /btrfs_tmp
+    '';
+  };
+  
+  environment.persistence."/persistent" = {
+  hideMounts = true;
+  directories = [
+    "/var/log"
+    "/var/lib/bluetooth"
+    "/var/lib/nixos"
+    "/etc/NetworkManager/system-connections"
+    "/etc/nixos" # <--- ¡AÑADE ESTO! Así tu configuración sobrevive para siempre
+  ];
+  files = [
+    "/etc/machine-id"
+    "/etc/shadow"
+    "/etc/passwd"
+    "/etc/group"
+  ];
+  
+  # Tu configuración de usuario (humbe) sigue abajo...
+};
+
   users ={ 
     defaultUserShell = pkgs.fish;
-    mutableUsers = true;
+    mutableUsers = false;
 
     users."humbe" = {
       isNormalUser = true;
       description = "Humberto B.";
       extraGroups = [ "networkmanager" "wheel" ];
-      packages = with pkgs; [
-      ];
+      createHome = true;
+      
+      hashedPassword = "$6$rvI2ZNaKpc69XPeZ$R6iSUJ3l7iYlFc6eJz4pue1cl51d0H0dBNYkJcTm5BddRohQkdCC7sHmS50UczcPKESV//lw0CpO071roxsB21";
     };
   };
 

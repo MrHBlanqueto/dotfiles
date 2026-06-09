@@ -80,10 +80,11 @@
       interactiveShellInit = ''set -g fish_greeting ""'';
 
       shellAliases = {
-        delgen = "sudo nix-env --delete-generations old && sudo nix-store --gc";
+        delgen = "sudo nix-env -p /nix/var/nix/profiles/system --delete-generations old && nix-env --delete-generations old && sudo nix-store --gc";
         nix-update = "sudo nixos-rebuild switch";
         flake-update-rb = "sudo nixos-rebuild boot --flake .#NixOS --impure";
         flake-update-sw = "sudo nixos-rebuild switch --flake .#NixOS --impure";
+        
         g = "git";
         c = "clear";
 

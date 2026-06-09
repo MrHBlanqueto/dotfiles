@@ -4,7 +4,7 @@
 local wezterm = require('wezterm')
 local config = wezterm.config_builder()
 
-local font_normal = { family = 'FiraCode Nerd Font', weight = 'Regular' }
+local font_normal = { family = 'UbuntuMono Nerd Font', weight = 'Regular' }
 local font_bold   = { family = 'FiraCode Nerd Font', weight = 'Bold' }
 local font_fallback_ubuntu = { family = 'UbuntuMono Nerd Font' }
 
@@ -34,8 +34,9 @@ config = {
   hide_tab_bar_if_only_one_tab = true,
   show_tab_index_in_tab_bar = false,
 
-  font_size = 9,
+  font_size = 10.2,
   line_height = 1.0,
+
   font = wezterm.font_with_fallback({
     font_normal,
     font_fallback_ubuntu,
@@ -46,25 +47,25 @@ config = {
     { 
       italic = true, 
       intensity = 'Normal',
-      font = font_with_fallback(victor_italic, { italic = true }) 
+      font = font_with_fallback({ family = 'Victor Mono', style = 'Italic', scale = 0.8 }, { italic = true }) 
     },
 
     { 
       italic = true, 
       intensity = 'Bold', 
-      font = font_with_fallback(victor_bold_italic, { bold = true, italic = true }) 
+      font = font_with_fallback({ family = 'Victor Mono', style = 'Italic', weight = 'Bold', scale = 0.8 }, { bold = true, italic = true }) 
     },
 
     { 
       italic = false,
       intensity = 'Bold', 
-      font = font_with_fallback(font_bold, { bold = true }) 
+      font = font_with_fallback({ family = 'FiraCode Nerd Font', weight = 'Bold', scale = 0.85 }, { bold = true }) 
     },
 
     { 
       italic = false,
       intensity = 'Half', 
-      font = font_with_fallback({ family = 'FiraCode Nerd Font', weight = 'DemiBold' }) 
+      font = font_with_fallback({ family = 'FiraCode Nerd Font', weight = 'DemiBold', scale = 0.85 }) 
     },
   },
 

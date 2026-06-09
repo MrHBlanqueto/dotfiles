@@ -37,10 +37,11 @@
       eza
 
       twitter-color-emoji
-      nerd-fonts.ubuntu-sans
       nerd-fonts.ubuntu-mono
       nerd-fonts.fira-code
       victor-mono
+      
+      python3
 
       # x86_64
       # onlyoffice-desktopeditors
@@ -84,7 +85,7 @@
         nix-update = "sudo nixos-rebuild switch";
         flake-update-rb = "sudo nixos-rebuild boot --flake .#NixOS --impure";
         flake-update-sw = "sudo nixos-rebuild switch --flake .#NixOS --impure";
-        
+
         g = "git";
         c = "clear";
 

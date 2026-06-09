@@ -35,7 +35,7 @@ config = {
   show_tab_index_in_tab_bar = false,
 
   font_size = 9,
-  line_height = 1.1,
+  line_height = 1.0,
   font = wezterm.font_with_fallback({
     font_normal,
     font_fallback_ubuntu,

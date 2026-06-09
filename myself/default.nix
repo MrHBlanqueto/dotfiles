@@ -25,6 +25,7 @@
     };
 
     packages = with pkgs; [
+      neovim
       vscode
       wezterm
       nautilus

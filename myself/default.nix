@@ -1,12 +1,13 @@
 { config, pkgs, lib, inputs, ... }:
 
 {
-home = {
+  home = {
     username = "humbe";
     homeDirectory = "/home/humbe";
 
     file = {
         ".config/wezterm/wezterm.lua".text = import ./config/wezterm.nix { };
+        # ".config/starship.toml".text = import ./config/starship.nix { };
       };
 
     sessionVariables = {
@@ -29,7 +30,7 @@ home = {
       nautilus
       telegram-desktop
       #libreoffice-fresh
-      #gnome-tweaks
+      gnome-tweaks
     
       fastfetch
       eza
@@ -38,6 +39,7 @@ home = {
       nerd-fonts.ubuntu-sans
       nerd-fonts.ubuntu-mono
       nerd-fonts.fira-code
+      victor-mono
 
       # x86_64
       # onlyoffice-desktopeditors
@@ -95,7 +97,6 @@ home = {
 
     starship = {
       enable = true;
-      #settings = import ./config/starship.nix;
     };
 
       home-manager = {

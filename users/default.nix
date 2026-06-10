@@ -110,14 +110,14 @@
         la = "ls -a";
         lla = "ls -la";
         lt = "ls --tree";
-  };
+      };
     };
 
     starship = {
       enable = true;
     };
 
-      home-manager = {
+    home-manager = {
       enable = true;
       path = "…";
     };

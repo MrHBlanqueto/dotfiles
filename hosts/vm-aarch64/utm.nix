@@ -16,11 +16,11 @@ nixpkgs.lib.nixosSystem rec {
         sharedModules = [ 
           #"${inputs.helium-flake}/modules/home-manager/default.nix"
         ];
-        users.humbe = nixpkgs.lib.mkMerge [ ../users ];
+        users.humbe = nixpkgs.lib.mkMerge [ ../../users ];
       };
       nixpkgs = { inherit config overlays; };
     }
-    ../system
-      /hardware-configuration.nix
+    ../../system
+        ./hardware-configuration.nix
   ];
 }

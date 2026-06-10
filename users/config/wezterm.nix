@@ -12,11 +12,6 @@
     family = 'UbuntuMono Nerd Font'
   }
 
-  local font_bold   = { 
-    family = 'FiraCode Nerd Font', 
-    weight = 'Bold'
-  }
-
   local function font_with_fallback(name, params)
     return wezterm.font_with_fallback({
       name,
@@ -45,10 +40,10 @@
     },
 
     window_padding = { 
-      left = 34, 
-      right = 34, 
-      top = 34, 
-      bottom = 34 
+      left = 40, 
+      right = 40, 
+      top = 40, 
+      bottom = 40 
     },
 
     enable_tab_bar = true,
@@ -56,7 +51,7 @@
     hide_tab_bar_if_only_one_tab = true,
     show_tab_index_in_tab_bar = false,
 
-    font_size = 10.2,
+    font_size = 10.5,
     line_height = 1.0,
 
     font = wezterm.font_with_fallback({
@@ -99,9 +94,8 @@
         italic = false,
         intensity = 'Bold', 
         font = font_with_fallback({ 
-          family = 'FiraCode Nerd Font', 
+          family = 'UbuntuMono Nerd Font', 
           weight = 'Bold', 
-          scale = 0.85 
         }, 
             { bold = true }) 
       },
@@ -110,9 +104,8 @@
         italic = false,
         intensity = 'Half', 
         font = font_with_fallback({ 
-          family = 'FiraCode Nerd Font', 
+          family = 'UbuntuMono Nerd Font', 
           weight = 'DemiBold', 
-          scale = 0.85 
         }) 
       },
     },

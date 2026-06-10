@@ -7,7 +7,7 @@
 
     file = {
         ".config/wezterm/wezterm.lua".text = import ./config/wezterm.nix { };
-        # ".config/starship.toml".text = import ./config/starship.nix { };
+        ".config/starship.toml".text = import ./config/starship.nix { };
       };
 
     sessionVariables = {
@@ -19,6 +19,8 @@
 
       SDL_VIDEODRIVER = "wayland";
       QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+      QT_QPA_PLATFORM="wayland;xcb";
+      QT_QPA_PLATFORMTHEME="gnome";
       MOZ_ENABLE_WAYLAND = "1";
       CLUTTER_BACKEND = "wayland";
       NO_AT_BRIDGE = "1";
@@ -52,6 +54,24 @@
 
   programs = {
 
+    /*''helium = {
+      enable = false;
+      flags = [
+        "--ozone-platform-hint=auto"
+      ];
+
+      package = inputs.helium-flake.packages.${pkgs.stdenv.hostPlatform.system}.default.overrideAttrs (oldAttrs: {
+            src = oldAttrs.src.overrideAttrs (oldSrcAttrs: {
+              outputHash = "sha256-ESKv+yIyYJJfJd785w/vIgaPE4OTNulE5i4cN/RtDDY=";
+            });
+          });''
+        }; */
+    
+    brave = {
+      enable = true;
+      package = pkgs.brave;
+    };
+
     git = {
       enable = true;
       settings = {
@@ -67,11 +87,6 @@
         style = "full";
         theme = "base16";
       };
-    };
-
-    brave = {
-      enable = true;
-      package = pkgs.brave;
     };
 
     fish = {

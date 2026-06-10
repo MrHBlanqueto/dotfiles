@@ -1,26 +1,10 @@
-{ inputs, nixpkgs, home, config, overlays, ... }:
 
-nixpkgs.lib.nixosSystem rec {
-  system = "aarch64-linux";
+{ config, pkgs, lib, ... }: 
 
-  modules = [
-    home.nixosModules.home-manager
-    nixpkgs.nixosModules.notDetected
-    inputs.impermanence.nixosModules.impermanence
-
-    {
-      home-manager = {
-        sharedModules = [ ];
-        users.humbe = nixpkgs.lib.mkMerge [ ../myself ];
-      };
-
-      nixpkgs = { inherit config overlays; };
-    }
-
-    ({ config, pkgs, lib, ... }: {
+{
       imports = [
-        ./ecosystem
-        ./hardware-configuration.nix
+        ./libs/interface.nix
+        ./libs/systemd.nix
       ];
 
       boot = {
@@ -129,11 +113,11 @@ nixpkgs.lib.nixosSystem rec {
       environment.systemPackages = with pkgs; [
         git 
         wget 
-        curl 
+        curl
         
         polkit_gnome 
         gsettings-desktop-schemas 
-        libnotify 
+        libnotify
         
         noto-fonts-cjk-sans
         noto-fonts-cjk-serif
@@ -150,8 +134,4 @@ nixpkgs.lib.nixosSystem rec {
       documentation.nixos.enable = false;
 
       system.stateVersion = "26.05";
-    })
-  ];
-
-  specialArgs = { inherit inputs; };
 }

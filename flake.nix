@@ -1,12 +1,13 @@
 {
   description = "NixOS";
 
-  inputs = {
+  inputs = { 
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     home.url = "github:nix-community/home-manager";
     impermanence.url = "github:nix-community/impermanence";
 
     mac-style.url = "github:SergioRibera/s4rchiso-plymouth-theme";
+    # helium-flake.url = "github:oxcl/nix-flake-helium-browser"; #Helium Browser opcional
 
     nixpkgs.follows = "unstable";
   };
@@ -16,6 +17,7 @@
     nixpkgs, 
     home,
     impermanence,
+    # helium-flake,
     ... 
   }@inputs:
   with nixpkgs.lib;
@@ -38,15 +40,19 @@
               in {
               # Packages provided by flake inputs
               mac-style-plymouth = mac-style.packages.${system}.default;
+              # helium = inputs.helium-flake.packages.${system}.default;
             }
           )
         ];
   in
   {
-    nixosConfigurations.NixOS = import ./core { 
-      inherit config home inputs nixpkgs overlays;
+    nixosConfigurations = {
+
+      utm-aarch64 = import ./hosts/vm-aarch64/utm.nix { 
+        inherit config home inputs nixpkgs overlays;
+      };
     };
 
-    NixOS = self.nixosConfigurations.NixOS.config.system.build.toplevel;
+    utm-aarch64 = self.nixosConfigurations.utm.config.system.build.toplevel;
   };
 }

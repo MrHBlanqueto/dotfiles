@@ -94,8 +94,9 @@
         italic = false,
         intensity = 'Bold', 
         font = font_with_fallback({ 
-          family = 'UbuntuMono Nerd Font', 
-          weight = 'Bold', 
+          family = 'FiraCode Nerd Font', 
+          weight = 'Bold',
+          scale = 0.8
         }, 
             { bold = true }) 
       },
@@ -104,8 +105,9 @@
         italic = false,
         intensity = 'Half', 
         font = font_with_fallback({ 
-          family = 'UbuntuMono Nerd Font', 
+          family = 'FiraCode Nerd Font', 
           weight = 'DemiBold', 
+          scale = 0.8 
         }) 
       },
     },
@@ -133,7 +135,7 @@
       },
 
       brights = {
-        "#363B42", 
+        "#19202b", 
         "#ea746c", 
         "#7CE38B", 
         "#D9BE74", 

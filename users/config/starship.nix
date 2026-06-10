@@ -3,67 +3,31 @@
 ''
 format = """
 $character\
-$hostname\
 $directory\
+$hostname\
 $git_branch\
 $git_status\
 $git_commit\
-[ |](bold bright-black)[❯](bold bright-green)[❯](bold bright-yellow)[❯](bold bright-red) \
+[❯](bold bright-green)[❯](bold bright-yellow)[❯](bold bright-red)[ | ](bold bright-black)\
 
 """
 
-add_newline = false
+add_newline = true
 
-# 1. HOSTNAME
-[hostname]
-ssh_only = true 
-format = "[](fg:black bg:none)[█](fg:white bg:black)[$ssh_symbol$hostname](bold bg:white)[](fg:white bg:none)"
-disabled = false
-
-# 2. DIRECTORIO
 [directory]
-format = "[](fg:bright-black bg:none)[$path]($style)[█](fg:bright-black bg:bright-black)"
-style = "fg:white bg:bright-black bold"
+format = "[█](fg:bright-black bg:none)[$path]($style)[█ ](fg:bright-black bg:none)"
+style = "fg:bold bright-white bg:bright-black"
 truncation_length = 3
 truncate_to_repo = false
 read_only = " "
 
-# 3. RAMA DE GIT
-[git_branch]
-format = "[](fg:black bg:none)[$branch]($style)[](fg:black bg:black)[](fg:green bg:black)[](fg:black bg:green)[](fg:green bg:none) "
-style = "fg:white bg:black"
-symbol = " "
-
-# 4. ESTADO DE GIT
-[git_status]
-format = "[](fg:black bg:none)[$all_status$ahead_behind]($style)[](fg:black bg:black)[](fg:blue bg:black)[ ](fg:black bg:blue)[](fg:blue bg:none) "
-style = "fg:white bg:black"
-conflicted = "="
-ahead = "⇡''${count}"
-behind = "⇣''${count}"
-diverged = "⇕⇡''${ahead_count}⇣''${behind_count}"
-up_to_date = " 󰄸 "
-untracked = "?''${count}"
-stashed = ""
-modified = "!''${count}"
-staged = "+''${count}"
-renamed = "»''${count}"
-deleted = " ''${count}"
-
-# 5. COMMIT DE GIT
-[git_commit]
-format = "[$hash]($style) [$tag]($style) "
-style = "green"
-
 [character]
-format = "$symbol "
+format = "$symbol"
 
-# ESTADO 1: Verde si el comando anterior fue BIEN (Modo Insertar por defecto)
-success_symbol = "[ ](blue)"
+success_symbol = "[](fg:bright-black bg:none)[ 󰉋  ](fg:blue bg:bright-black)[](fg:bright-black bg:none)"
 
-# ESTADO 2: Rojo si el comando anterior fue MAL
-error_symbol = "[ ](red)"
+error_symbol = "[](fg:bold bright-black bg:none)[ 󰉋  ](fg:red bg:bright-black)[](fg:bold bright-black bg:none)"
 
 [line_break]
 disabled = true
-''
+'' 

@@ -40,6 +40,7 @@
 
       twitter-color-emoji
       nerd-fonts.ubuntu-mono
+      nerd-fonts.ubuntu-sans
       nerd-fonts.fira-code
       victor-mono
       

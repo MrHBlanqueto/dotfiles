@@ -20,7 +20,7 @@ nixpkgs.lib.nixosSystem rec {
       };
       nixpkgs = { inherit config overlays; };
     }
-    ../../system
-        ./hardware-configuration.nix
+      ../../system
+      ../../hardware-configuration.nix
   ];
 }

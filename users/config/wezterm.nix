@@ -51,7 +51,7 @@
     hide_tab_bar_if_only_one_tab = true,
     show_tab_index_in_tab_bar = false,
 
-    font_size = 11.0,
+    font_size = 10.2,
     line_height = 1.0,
 
     font = wezterm.font_with_fallback({
@@ -96,7 +96,7 @@
         font = font_with_fallback({ 
           family = 'FiraCode Nerd Font', 
           weight = 'Bold',
-          scale = 0.8
+          scale = 0.9
         }, 
             { bold = true }) 
       },
@@ -107,7 +107,7 @@
         font = font_with_fallback({ 
           family = 'FiraCode Nerd Font', 
           weight = 'DemiBold', 
-          scale = 0.8 
+          scale = 0.9
         }) 
       },
     },

@@ -30,7 +30,6 @@
             initrdBin = with pkgs; [ coreutils btrfs-progs findutils ];
         
             services.rollback = {
-              description = "Limpieza de la raiz efimera de Btrfs";
               wantedBy = [ "initrd.target" ];
               before = [ "sysroot.mount" ];
               unitConfig.DefaultDependencies = "no";

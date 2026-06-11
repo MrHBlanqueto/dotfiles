@@ -52,7 +52,7 @@
     show_tab_index_in_tab_bar = false,
 
     font_size = 10.2,
-    line_height = 1.0,
+    line_height = 1.3,
 
     font = wezterm.font_with_fallback({
       font_normal,
@@ -114,7 +114,7 @@
 
     colors = {
       foreground = "#adbac7",
-      background = "#03070d",
+      background = "#04070c",
 
       cursor_bg = "#adbac7",
       cursor_fg = "#0d1117",
@@ -135,7 +135,7 @@
       },
 
       brights = {
-        "#060b14", 
+        "#08101e", 
         "#ea746c", 
         "#7CE38B", 
         "#D9BE74", 

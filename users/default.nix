@@ -103,14 +103,7 @@
       # Desactivate Greeting.
       interactiveShellInit = ''
         set -g fish_greeting 
-        set -g fish_color_command --bold blue
-        set -g fish_color_param --bold cyan
-        set -g fish_color_valid_path --bold green
-        set -g fish_color_quote --bold yellow
-        set -g fish_color_end --bold magenta
-
-        set -g fish_color_pager_prefix --bold cyan
-        set -g fish_color_pager_description --bold yellow""'';
+        set -g fish_color_command --bold green""'';
 
       shellAliases = {
         delgen = "sudo nix-env -p /nix/var/nix/profiles/system --delete-generations old && nix-env --delete-generations old && sudo nix-store --gc";

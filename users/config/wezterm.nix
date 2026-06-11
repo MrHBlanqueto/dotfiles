@@ -114,7 +114,7 @@
 
     colors = {
       foreground = "#adbac7",
-      background = "#060b14",
+      background = "#03070d",
 
       cursor_bg = "#adbac7",
       cursor_fg = "#0d1117",
@@ -135,7 +135,7 @@
       },
 
       brights = {
-        "#0c1627", 
+        "#060b14", 
         "#ea746c", 
         "#7CE38B", 
         "#D9BE74", 

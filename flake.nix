@@ -7,7 +7,7 @@
     impermanence.url = "github:nix-community/impermanence";
 
     mac-style.url = "github:SergioRibera/s4rchiso-plymouth-theme";
-    # helium-flake.url = "github:oxcl/nix-flake-helium-browser"; #Helium Browser opcional
+    # brave-origin.url = "github:Daniel-42-z/brave-origin-flake"; # amd64 only
 
     nixpkgs.follows = "unstable";
   };
@@ -17,7 +17,6 @@
     nixpkgs, 
     home,
     impermanence,
-    # helium-flake,
     ... 
   }@inputs:
   with nixpkgs.lib;
@@ -40,7 +39,7 @@
               in {
               # Packages provided by flake inputs
               mac-style-plymouth = mac-style.packages.${system}.default;
-              # helium = inputs.helium-flake.packages.${system}.default;
+              #brave-origin = brave-origin.${system}.default;
             }
           )
         ];
@@ -48,8 +47,9 @@
   {
     nixosConfigurations = {
 
-      utm-aarch64 = import ./hosts/vm-aarch64/utm.nix { 
-        inherit config home inputs nixpkgs overlays;
+      utm-aarch64 = import ./system {
+        inherit config home inputs nixpkgs overlays ;
+        system = "aarch64-linux";
       };
     };
 

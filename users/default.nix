@@ -11,16 +11,13 @@
       };
 
     sessionVariables = {
-      #BROWSER = "${pkgs.brave}/bin/brave";
-      #EDITOR = "${config.programs.nixvim.package}/bin/nvim";
-      #GOPATH = "${config.home.homeDirectory}/Extras/go";
-      #QT_QPA_PLATFORMTHEME = "qt5ct";
-      #RUSTUP_HOME = "${config.home.homeDirectory}/.local/share/rustup";
+      BROWSER = "${pkgs.firefox}/bin/firefox";
+      TERMINAL = "wezterm";
 
       SDL_VIDEODRIVER = "wayland";
       QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
       QT_QPA_PLATFORM="wayland;xcb";
-      QT_QPA_PLATFORMTHEME="gnome";
+      QT_QPA_PLATFORMTHEME="gnome"; # or "qt5ct"
       MOZ_ENABLE_WAYLAND = "1";
       CLUTTER_BACKEND = "wayland";
       NO_AT_BRIDGE = "1";
@@ -55,23 +52,11 @@
 
   programs = {
 
-    /*''helium = {
-      enable = false;
-      flags = [
-        "--ozone-platform-hint=auto"
-      ];
-
-      package = inputs.helium-flake.packages.${pkgs.stdenv.hostPlatform.system}.default.overrideAttrs (oldAttrs: {
-            src = oldAttrs.src.overrideAttrs (oldSrcAttrs: {
-              outputHash = "sha256-ESKv+yIyYJJfJd785w/vIgaPE4OTNulE5i4cN/RtDDY=";
-            });
-          });''
-        }; */
-    
     brave = {
       enable = true;
-      package = pkgs.brave;
+      # package = inputs.brave-origin.packages.${pkgs.stdenv.hostPlatform.system}.default;
     };
+    
 
     git = {
       enable = true;
@@ -92,6 +77,28 @@
 
     fish = {
       enable = true;
+
+      functions = {
+        fish_greeting = {
+          body = ''
+            set -l log_file "/tmp/.wezterm_last_login"
+
+              if test -f $log_file
+            set -l lines (count < $log_file)
+    
+              if test "$lines" -eq 1
+                cat $log_file
+              else if test "$lines" -gt 1
+            tail -n 2 $log_file | head -n 1
+          end
+        end
+        set -l current_time (env LC_TIME=C date "+%a %b %d %H:%M:%S")
+        set -l current_tty (string replace "/dev/" "" (tty))
+
+        echo "Last login: $current_time on $current_tty" >> $log_file
+      '';
+    };
+  };
 
       # Desactivate Greeting.
       interactiveShellInit = ''

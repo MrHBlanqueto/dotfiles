@@ -2,31 +2,37 @@
 
 ''
 format = """
-$character\
 $directory\
 $hostname\
 $git_branch\
 $git_status\
 $git_commit\
-[❯](bold bright-green)[❯](bold bright-yellow)[❯](bold bright-red)[ | ](bold bright-black)\
+$character\
 
+"""
+
+right_format = """
+$cmd_duration
 """
 
 add_newline = true
 
+[cmd_duration]
+min_time = 2000
+format = "[took](bold bright-yellow) [$duration]($style) "
+style = "yellow bold"
+
 [directory]
-format = "[█](fg:bright-black bg:none)[$path]($style)[█ ](fg:bright-black bg:none)"
-style = "fg:bold bright-white bg:bright-black"
+format = "[█](fg:bright-black bg:none)[$path]($style)[█ ](fg:bright-black bg:none)"
+style = "fg:bold bright-blue bg:bright-black"
 truncation_length = 3
 truncate_to_repo = false
 read_only = " "
 
 [character]
 format = "$symbol"
-
-success_symbol = "[](fg:bright-black bg:none)[ 󰉋  ](fg:blue bg:bright-black)[](fg:bright-black bg:none)"
-
-error_symbol = "[](fg:bold bright-black bg:none)[ 󰉋  ](fg:red bg:bright-black)[](fg:bold bright-black bg:none)"
+success_symbol = "[❯](bold bright-red)[❯](bold bright-yellow)[❯ ](bold bright-green)"
+error_symbol = "[❯](bold bright-red)[❯](bold bright-red)[❯ ](bold bright-red)"
 
 [line_break]
 disabled = true

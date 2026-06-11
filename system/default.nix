@@ -1,10 +1,26 @@
+{ inputs, nixpkgs, home, config, overlays, ... }:
 
-{ config, pkgs, lib, ... }: 
+nixpkgs.lib.nixosSystem rec {
 
-{
+  modules = [
+    home.nixosModules.home-manager
+    nixpkgs.nixosModules.notDetected
+    inputs.impermanence.nixosModules.impermanence
+
+    {
+      home-manager = {
+        sharedModules = [ ];
+        users.humbe = nixpkgs.lib.mkMerge [ ../users ];
+      };
+
+      nixpkgs = { inherit config overlays; };
+    }
+
+    ({ config, pkgs, lib, ... }: {
       imports = [
         ./libs/interface.nix
         ./libs/systemd.nix
+        ../hardware-configuration.nix
       ];
 
       boot = {
@@ -30,6 +46,7 @@
             initrdBin = with pkgs; [ coreutils btrfs-progs findutils ];
         
             services.rollback = {
+              description = "Limpieza de la raiz efimera de Btrfs";
               wantedBy = [ "initrd.target" ];
               before = [ "sysroot.mount" ];
               unitConfig.DefaultDependencies = "no";
@@ -87,6 +104,7 @@
           "/var/lib/bluetooth"
           "/var/lib/nixos"
           "/etc/NetworkManager/system-connections"
+          "/var/lib/AccountsService"
           "/etc/nixos"
         ];
         files = [
@@ -112,12 +130,14 @@
       environment.systemPackages = with pkgs; [
         git 
         wget 
-        curl
+        curl 
         
         polkit_gnome 
         gsettings-desktop-schemas 
-        libnotify
+        libnotify 
         
+        firefox
+
         noto-fonts-cjk-sans
         noto-fonts-cjk-serif
         noto-fonts-color-emoji
@@ -133,4 +153,8 @@
       documentation.nixos.enable = false;
 
       system.stateVersion = "26.05";
+    })
+  ];
+
+  specialArgs = { inherit inputs; };
 }

@@ -83,8 +83,6 @@ Your file system declarations should match the following structure:
 
 
 ### Installation
-
-# Install the system
 ```
 nixos-install --root /mnt --flake '#utm-aarch64' --impure --show-trace
 

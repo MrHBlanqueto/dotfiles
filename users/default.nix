@@ -1,6 +1,11 @@
-{ config, pkgs, lib, inputs, ... }:
+{ config, pkgs, inputs, lib, ... }:
 
 {
+
+  imports = [
+    ./config/ncmpcpp.nix
+  ];
+
   home = {
     username = "humbe";
     homeDirectory = "/home/humbe";
@@ -22,6 +27,7 @@
       CLUTTER_BACKEND = "wayland";
       NO_AT_BRIDGE = "1";
     };
+
 
     packages = with pkgs; [
       neovim
@@ -50,8 +56,8 @@
     stateVersion = "26.05";
   };
 
-  programs = {
 
+  programs = {
     brave = {
       enable = true;
       # package = inputs.brave-origin.packages.${pkgs.stdenv.hostPlatform.system}.default;
@@ -129,7 +135,6 @@
 
     home-manager = {
       enable = true;
-      path = "…";
     };
   };
 

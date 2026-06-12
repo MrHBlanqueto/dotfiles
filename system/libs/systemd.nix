@@ -38,6 +38,7 @@
 
       bpftune.enable = true;
   };
+  
 
   nix = {
     gc = {

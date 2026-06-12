@@ -114,7 +114,7 @@
 
     colors = {
       foreground = "#adbac7",
-      background = "#04070c",
+      background = "#050a13",
 
       cursor_bg = "#adbac7",
       cursor_fg = "#0d1117",

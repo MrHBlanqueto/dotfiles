@@ -12,7 +12,7 @@
 
     file = {
         ".config/wezterm/wezterm.lua".text = import ./config/wezterm.nix { };
-        ".config/starship.toml".text = import ./config/starship.nix { };
+        #".config/starship.toml".text = import ./config/starship.nix { };
       };
 
     sessionVariables = {
@@ -131,6 +131,7 @@
 
     starship = {
       enable = true;
+      settings = import ./config/starship.nix;
     };
 
     home-manager = {

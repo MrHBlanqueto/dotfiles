@@ -1,39 +1,33 @@
-{}:
+{
+  format = "$directory$hostname$git_branch$git_status$git_commit$character";
 
-''
-format = """
-$directory\
-$hostname\
-$git_branch\
-$git_status\
-$git_commit\
-$character\
+  right_format = ''
+    $cmd_duration
+  '';
 
-"""
+  add_newline = true;
 
-right_format = """
-$cmd_duration
-"""
+  cmd_duration = {
+    min_time = 2000;
+    format = "[took](bold bright-yellow) [$duration]($style) ";
+    style = "yellow bold";
+  };
 
-add_newline = true
+  directory = {
+    format = "[█](fg:bright-black bg:none)[$path]($style)[█ ](fg:bright-black bg:none)";
+    style = "fg:bold bright-blue bg:bright-black";
+    truncation_length = 3;
+    truncate_to_repo = false;
+    read_only = " ";
+  };
 
-[cmd_duration]
-min_time = 2000
-format = "[took](bold bright-yellow) [$duration]($style) "
-style = "yellow bold"
+  character = {
+    format = "$symbol";
+    success_symbol = "[❯](bold bright-red)[❯](bold bright-yellow)[❯ ](bold bright-green)";
+    error_symbol = "[❯](bold bright-red)[❯](bold bright-red)[❯ ](bold bright-red)";
+  };
 
-[directory]
-format = "[█](fg:bright-black bg:none)[$path]($style)[█ ](fg:bright-black bg:none)"
-style = "fg:bold bright-blue bg:bright-black"
-truncation_length = 3
-truncate_to_repo = false
-read_only = " "
-
-[character]
-format = "$symbol"
-success_symbol = "[❯](bold bright-red)[❯](bold bright-yellow)[❯ ](bold bright-green)"
-error_symbol = "[❯](bold bright-red)[❯](bold bright-red)[❯ ](bold bright-red)"
-
-[line_break]
-disabled = true
-'' 
+  line_break = {
+    disabled = true;
+  };
+}

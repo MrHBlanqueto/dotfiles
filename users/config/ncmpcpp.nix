@@ -45,36 +45,33 @@
         playlist_display_mode = "columns";
         browser_display_mode = "columns";
         user_interface = "classic";
+
+        startup_screen = "playlist";
+        locked_screen_width_part = "50";
+        ask_for_locked_screen_width_part = "yes";
+
+        header_visibility = "no";
         autocenter_mode = "yes";
         centered_cursor = "yes";
         mouse_support = "yes";
 
-        startup_screen = "visualizer";
-        locked_screen_width_part = "33";
-        startup_slave_screen = "playlist";
-        state_line_color = "black";
-
-        window_border_color = "default";
-
-        progressbar_look = "━━━";
-        progressbar_elapsed_color = "5";
+        progressbar_look = "━●━";
         progressbar_color = "black";
+        progressbar_elapsed_color = "white";
 
-        header_visibility = "no";
-        statusbar_visibility = "yes";
-        titles_visibility = "no";
-        enable_window_title = "no";
+        empty_tag_marker = " ";
+        window_border_color = "black";
+        active_window_border = "black";
 
-        statusbar_color = "black";
-        color1 = "white";
-        color2 = "blue";
+        song_status_format = "$1[ %a ] %b - %t";
+        song_columns_list_format = "(53)[white]{tr} (45)[white]{a}";
+        song_library_format = "{{%a - %t} (%b)}|{%f}";
 
-        song_columns_list_format = "(52)[]{t|fr:Title} (0)[magenta]{a}";
-        song_list_format = " {%t $R   $8%a$8}|{%f $R   $8%l$8} $8";
-        song_status_format = "$1  %a - \"%t\" - %b";
-        song_window_title_format = "Now Playing ..";
+        now_playing_prefix = "$b$2$7 ";
+        now_playing_suffix = "  $/b$8";
+        current_item_prefix = "$b$7$/b$3 ";
+        current_item_suffix = "  $4";
       };
     };
   };
-};
 }

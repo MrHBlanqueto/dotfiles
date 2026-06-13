@@ -124,25 +124,25 @@
       split = "#232931",
 
       ansi = {
-        "#3B4B58", 
-        "#FF958E", 
-        "#9DFAAA", 
-        "#FBDF90", 
-        "#BDfBff", 
-        "#E3C9FF", 
-        "#B8FFB2", 
-        "#F6FAFD"
+        "#142238",
+        "#d47d7a",
+        "#8ecb94",
+        "#cfb984",
+        "#9bb9c4",
+        "#aa96c2",
+        "#88c29b",
+        "#cdd9e5"
       },
 
       brights = {
-        "#08101e", 
-        "#ea746c", 
-        "#7CE38B", 
-        "#D9BE74", 
-        "#BEDFE8", 
-        "#BD89F5", 
-        "#94E4A5", 
-        "#F6FAFD"
+        "#2c3b54",
+        "#e59592",
+        "#a3dcb1",
+        "#dfca9b",
+        "#b2cbd4",
+        "#bda9d6",
+        "#9dd4af",
+        "#eef4fa"
       },
 
       tab_bar = {

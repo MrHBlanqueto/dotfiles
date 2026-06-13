@@ -16,7 +16,11 @@ nixpkgs.lib.nixosSystem rec {
       nixpkgs = { inherit config overlays; };
     }
 
-    ({ config, pkgs, lib, ... }: {
+    ({ config, pkgs, lib, ... }: 
+    
+    let theme = import ../theme { };
+      in
+    {
       imports = [
         ./libs/interface.nix
         ./libs/systemd.nix
@@ -88,6 +92,17 @@ nixpkgs.lib.nixosSystem rec {
           "net.ipv4.tcp_slow_start_after_idle" = 0;
         };
       };
+
+      console =
+        let
+          normal = with theme.colors; [ bg c1 c2 c3 c4 c5 c6 c7 ];
+          bright = with theme.colors; [ lbg c9 c10 c11 c12 c13 c14 c15 ];
+                in
+              {
+                colors = normal ++ bright;
+                font = "Lat2-Terminus16";
+                keyMap = "es";
+              };
 
       networking.hostName = "NixOS-VM";
 

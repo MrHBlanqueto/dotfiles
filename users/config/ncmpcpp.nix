@@ -5,7 +5,7 @@
   services = {
     mpd = {
       enable = true;
-      musicDirectory = "${config.home.homeDirectory}/Música"; # Asegúrate de que termine en "Música"
+      musicDirectory = "${config.home.homeDirectory}/Música";
       playlistDirectory = "${config.home.homeDirectory}/.config/mpd/playlists";
       dataDir = "${config.home.homeDirectory}/.config/mpd";
   
@@ -25,7 +25,6 @@
   };
 
   programs = {
-
     ncmpcpp = {
       enable = true;
       package = pkgs.ncmpcpp.override { visualizerSupport = true; };
@@ -40,7 +39,9 @@
         visualizer_output_name = "my_fifo";
         visualizer_in_stereo = "yes";
         visualizer_type = "ellipse"; 
+        visualizer_fps = "60";
         visualizer_look = "●●";
+        visualizer_color = "33,39,63,75,81,99,117,153,189";
     
         playlist_display_mode = "columns";
         browser_display_mode = "columns";
@@ -57,13 +58,13 @@
 
         progressbar_look = "━●━";
         progressbar_color = "black";
-        progressbar_elapsed_color = "white";
+        progressbar_elapsed_color = "blue";
 
         empty_tag_marker = " ";
         window_border_color = "black";
         active_window_border = "black";
 
-        song_status_format = "$1[ %a ] %b - %t";
+        song_status_format = "$5[ %a ] %b - %t";
         song_columns_list_format = "(53)[white]{tr} (45)[white]{a}";
         song_library_format = "{{%a - %t} (%b)}|{%f}";
 

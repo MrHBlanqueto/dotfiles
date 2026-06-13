@@ -5,7 +5,7 @@
 
     xserver = {
       enable = true;
-      wacom.enable = true;
+      wacom.enable = false;
       excludePackages = [ pkgs.xterm ];
 
       xkb = {
@@ -34,6 +34,4 @@
   }; 
 
   environment.gnome.excludePackages = with pkgs; [ gnome-tour ];
-
-  console.keyMap = "es";
 }

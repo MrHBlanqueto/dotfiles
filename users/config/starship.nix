@@ -14,8 +14,8 @@
   };
 
   directory = {
-    format = "[█](fg:bright-black bg:none)[$path]($style)[█ ](fg:bright-black bg:none)";
-    style = "fg:bold bright-blue bg:bright-black";
+    format = "[█](fg:black bg:none)[$path]($style)[█ ](fg:black bg:none)";
+    style = "fg:bold bright-blue bg:black";
     truncation_length = 3;
     truncate_to_repo = false;
     read_only = " ";

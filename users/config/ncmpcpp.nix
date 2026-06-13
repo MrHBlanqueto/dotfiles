@@ -39,7 +39,7 @@
         visualizer_output_name = "my_fifo";
         visualizer_in_stereo = "yes";
         visualizer_type = "ellipse"; 
-        visualizer_fps = "60";
+        visualizer_fps = "30";
         visualizer_look = "●●";
         visualizer_color = "33,39,63,75,81,99,117,153,189";
     
@@ -47,8 +47,17 @@
         browser_display_mode = "columns";
         user_interface = "classic";
 
-        startup_screen = "playlist";
-        locked_screen_width_part = "50";
+        startup_screen = "visualizer";
+        startup_slave_screen = "playlist"; 
+        locked_screen_width_part = "33";
+
+        startup_slave_screen_focus = "yes";
+        header_window_color = "default";
+        alternative_ui_separator_color = "default";
+        titles_visibility = "no";
+
+
+        ask_before_clearing_playlists = "no";
         ask_for_locked_screen_width_part = "yes";
 
         header_visibility = "no";
@@ -68,9 +77,9 @@
         song_columns_list_format = "(53)[white]{tr} (45)[white]{a}";
         song_library_format = "{{%a - %t} (%b)}|{%f}";
 
-        now_playing_prefix = "$b$2$7 ";
+        now_playing_prefix = "$b$1$7 ";
         now_playing_suffix = "  $/b$8";
-        current_item_prefix = "$b$7$/b$3 ";
+        current_item_prefix = "$b$5$/b$3 ";
         current_item_suffix = "  $4";
       };
     };

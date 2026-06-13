@@ -47,6 +47,8 @@
       nerd-fonts.fira-code
       victor-mono
       
+      ffmpeg
+      mpc
       python3
 
       # x86_64

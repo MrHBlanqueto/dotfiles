@@ -131,6 +131,7 @@ in
 
     userDirs = {
       enable = true;
+      desktop = "${config.home.homeDirectory}/Escritorio";
       documents = "${config.home.homeDirectory}/Documentos";
       music = "${config.home.homeDirectory}/Música";
       pictures = "${config.home.homeDirectory}/Imágenes";

@@ -55,6 +55,76 @@ in
 
     yazi = {
       enable = true;
+
+      plugins = {
+        inherit (pkgs.yaziPlugins) 
+          full-border
+          yatline;
+      };
+
+      theme = {
+        mgr = {
+          border_style = { fg = "black"; };
+        };
+        header = {
+          overall = { fg = "white"; bg = "black"; };
+        };
+        status = {
+          overall = { fg = "white"; bg = "black"; };
+        };
+      };
+
+      initLua = ''
+        -- Activamos el borde exterior redondeado
+        require("full-border"):setup {
+          type = ui.Border.ROUNDED,
+        }
+
+        -- Configuramos Yatline para encapsular el Header y el Status
+        require("yatline"):setup {
+        	section_separator = { open = "", close = "" },
+	        part_separator = { open = "", close = "" },
+	        inverse_separator = { open = "", close = "" },
+          -- DISEÑO DEL HEADER (Parte Superior)
+          header = {
+            -- Ponemos la sección de la ruta (header_a) dentro de una cápsula
+            header_a = {
+              components = { "colored_path" },
+              fg = "cyan",
+              bg = "black",
+              style = "bold",
+            },
+            -- Las pestañas al lado de forma sutil
+            header_b = {
+              components = { "tabs" },
+              fg = "darkgray",
+              bg = "black",
+            }
+          },
+
+          -- DISEÑO DEL STATUS (Parte Inferior)
+          status = {
+            status_a = {
+              components = { "mode" },
+              fg = "cyan",
+              bg = "black",
+              style = "bold",
+            },
+            status_b = {
+              components = { "permissions" },
+              fg = "green",
+              bg = "black",
+              style = "bold",
+            },
+            status_c = {
+              components = { "percentage" },
+              fg = "magenta",
+              bg = "black",
+              style = "bold",
+            }
+          }
+        }
+      '';
     };
 
     ncmpcpp = {

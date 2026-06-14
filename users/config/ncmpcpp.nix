@@ -1,35 +1,12 @@
 { config, pkgs, ... }:
 
 {
-
-  services = {
-    mpd = {
-      enable = true;
-      musicDirectory = config.xdg.userDirs.music;
-      playlistDirectory = "${config.home.homeDirectory}/.config/mpd/playlists";
-      dataDir = "${config.home.homeDirectory}/.config/mpd";
-  
-      extraConfig = ''
-          audio_output {
-          type        "pipewire"
-          name        "PipeWire Sound Server"
-        }
-
-          audio_output {
-          type        "fifo"
-          name        "my_fifo"
-          path        "/tmp/mpd.fifo"
-          format      "44100:16:2"
-        }'';
-    };
-  };
-
   programs = {
     ncmpcpp = {
       enable = true;
       package = pkgs.ncmpcpp.override { visualizerSupport = true; };
       settings = {
-        execute_on_song_change = "~/Música/ncmpcpp-cover_arch.sh";
+        #execute_on_song_change = " ";
         ncmpcpp_directory = "${config.home.homeDirectory}/.config/ncmpcpp";
         lyrics_directory = "${config.home.homeDirectory}/.config/ncmpcpp/lyrics";
         mpd_host = "127.0.0.1";
@@ -73,8 +50,6 @@
         empty_tag_marker = " ";
         window_border_color = "black";
         active_window_border = "black";
-
-        #song_status_format = "$5[ %a ] %b - %t";
         song_status_format = "$5 { %b }|{ %t }|{ %f }";
 
         song_columns_list_format = "(53)[white]{tr} (45)[white]{a}";

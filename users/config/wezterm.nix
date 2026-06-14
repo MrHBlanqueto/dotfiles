@@ -1,4 +1,6 @@
-{}:
+{theme}:
+
+with theme.colors;
 
 ''
   local wezterm = require('wezterm')
@@ -94,9 +96,8 @@
         italic = false,
         intensity = 'Bold', 
         font = font_with_fallback({ 
-          family = 'FiraCode Nerd Font', 
+          family = 'UbuntuMono Nerd Font', 
           weight = 'Bold',
-          scale = 0.9
         }, 
             { bold = true }) 
       },
@@ -105,68 +106,44 @@
         italic = false,
         intensity = 'Half', 
         font = font_with_fallback({ 
-          family = 'FiraCode Nerd Font', 
+          family = 'UbuntuMono Nerd Font', 
           weight = 'DemiBold', 
-          scale = 0.9
         }) 
       },
     },
 
-    colors = {
-      foreground = "#adbac7",
-      background = "#050a13",
+    -- Pretty Colors
+      bold_brightens_ansi_colors = false,
 
-      cursor_bg = "#adbac7",
-      cursor_fg = "#0d1117",
-      cursor_border = "#adbac7",
+      colors = {
+          foreground = "#${fg}",
+          background = "#${bg}",
+          cursor_bg = "#${c4}",
+          cursor_fg = "#${c4}",
+          cursor_border = "#${c4}",
+          split = "#${lbg}",
 
-      selection_bg = "#2f3840",
-      split = "#232931",
+          ansi = {
+              "#${c0}", "#${c1}", "#${c2}", "#${c3}", "#${c4}", "#${c5}",
+              "#${c6}", "#${c7}"
+          },
+          brights = {
+              "#${c8}", "#${c9}", "#${c10}", "#${c11}", "#${c12}", "#${c13}",
+              "#${c14}", "#${c15}"
+          },
 
-      ansi = {
-        "#142238",
-        "#d47d7a",
-        "#8ecb94",
-        "#cfb984",
-        "#9bb9c4",
-        "#aa96c2",
-        "#88c29b",
-        "#cdd9e5"
+          tab_bar = {
+              active_tab = {
+                  bg_color = "#${bg}",
+                  fg_color = "#${c8}",
+                  italic = true
+              },
+              inactive_tab = {bg_color = "#${dbg}", fg_color = "#${c8}"},
+              inactive_tab_hover = {bg_color = "#${c0}", fg_color = "#${bg}"}
+          }
+
       },
 
-      brights = {
-        "#2c3b54",
-        "#e59592",
-        "#a3dcb1",
-        "#dfca9b",
-        "#b2cbd4",
-        "#bda9d6",
-        "#9dd4af",
-        "#eef4fa"
-      },
-
-      tab_bar = {
-        background = "#010409",
-
-        inactive_tab_edge = "#010409",
-
-        active_tab = {
-          bg_color = "#010409",
-          fg_color = "#C6CDD5",
-          intensity = "Half"
-        },
-
-        inactive_tab = { 
-          bg_color = "#010409", 
-          fg_color = "#3B4B58" 
-        },
-
-        inactive_tab_hover = { 
-          bg_color = "#010409", 
-          fg_color = "#3B4B58" 
-        }
-      }
-    },
 
     disable_default_key_bindings = true,
 

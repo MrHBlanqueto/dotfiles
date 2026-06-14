@@ -26,8 +26,4 @@
     success_symbol = "[❯](bold bright-red)[❯](bold bright-yellow)[❯ ](bold bright-green)";
     error_symbol = "[❯](bold bright-red)[❯](bold bright-red)[❯ ](bold bright-red)";
   };
-
-  line_break = {
-    disabled = true;
-  };
 }

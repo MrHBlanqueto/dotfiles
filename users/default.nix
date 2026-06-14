@@ -1,7 +1,10 @@
 { config, pkgs, inputs, lib, ... }:
 
-{
+let
+  theme = import ../theme { };
+in
 
+{
   imports = [
     ./config/ncmpcpp.nix
   ];
@@ -9,11 +12,6 @@
   home = {
     username = "humbe";
     homeDirectory = "/home/humbe";
-
-    file = {
-        ".config/wezterm/wezterm.lua".text = import ./config/wezterm.nix { };
-        #".config/starship.toml".text = import ./config/starship.nix { };
-      };
 
     sessionVariables = {
       BROWSER = "${pkgs.firefox}/bin/firefox";
@@ -23,30 +21,22 @@
       QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
       QT_QPA_PLATFORM="wayland;xcb";
       QT_QPA_PLATFORMTHEME="gnome"; # or "qt5ct"
-      MOZ_ENABLE_WAYLAND = "1";
       CLUTTER_BACKEND = "wayland";
       NO_AT_BRIDGE = "1";
     };
 
 
     packages = with pkgs; [
-      neovim
+      fastfetch
+      eza
+      ffmpeg
+
+      python3
+
       vscode
       wezterm
       nautilus
       telegram-desktop
-      #libreoffice-fresh
-      gnome-tweaks
-    
-      fastfetch
-      eza
-      
-      ffmpeg
-      ueberzugpp
-      python3
-
-      # x86_64
-      # onlyoffice-desktopeditors
     ];
 
     stateVersion = "26.05";
@@ -59,12 +49,45 @@
       # package = inputs.brave-origin.packages.${pkgs.stdenv.hostPlatform.system}.default;
     };
     
-
     git = {
       enable = true;
       settings = {
         user.email = "mc4w6wmkrv@privaterelay.appleid.com";
         user.name = "MrHBlanqueto";
+      };
+    };
+
+    yazi = {
+      enable = true;
+
+      settings = {
+        yazi = {
+          ratio = [ 1 4 3 ];
+          sort_by = "natural";
+          sort_sensitive = true;
+          sort_reverse = false;
+          sort_dir_first = true;
+          linemode = "none";
+          show_hidden = true;
+          show_symlink = true;
+        };
+
+      preview = {
+        image_preview_protocol = "iterm2"; 
+      
+        image_filter = "lanczos3";
+          image_quality = 90;
+          tab_size = 1;
+          max_width = 600;
+          max_height = 900;
+          cache_dir = "";
+      };
+
+      tasks = {
+        micro_workers = 5;
+        macro_workers = 10;
+        bizarre_retry = 5;
+        };
       };
     };
 
@@ -79,28 +102,6 @@
 
     fish = {
       enable = true;
-
-      functions = {
-        fish_greeting = {
-          body = ''
-            set -l log_file "/tmp/.wezterm_last_login"
-
-              if test -f $log_file
-            set -l lines (count < $log_file)
-    
-              if test "$lines" -eq 1
-                cat $log_file
-              else if test "$lines" -gt 1
-            tail -n 2 $log_file | head -n 1
-          end
-        end
-        set -l current_time (env LC_TIME=C date "+%a %b %d %H:%M:%S")
-        set -l current_tty (string replace "/dev/" "" (tty))
-
-        echo "Last login: $current_time on $current_tty" >> $log_file
-      '';
-    };
-  };
 
       # Desactivate Greeting.
       interactiveShellInit = ''
@@ -139,6 +140,8 @@
       enable = true;
       package = pkgs.mpd;
       musicDirectory = config.xdg.userDirs.music;
+      playlistDirectory = "${config.home.homeDirectory}/.config/mpd/playlists";
+      dataDir = "${config.home.homeDirectory}/.config/mpd";
       extraConfig = import ./config/mpd.nix { };
     };
   };
@@ -148,12 +151,17 @@
   xdg = {
     enable = true;
 
+    configFile = {
+      "wezterm/wezterm.lua".text = import ./config/wezterm.nix { inherit theme; };
+    };
+
     userDirs = {
       enable = true;
-      documents = "${config.home.homeDirectory}/Documents";
-      music = "${config.home.homeDirectory}/Music";
-      pictures = "${config.home.homeDirectory}/Pictures";
+      documents = "${config.home.homeDirectory}/Documentos";
+      music = "${config.home.homeDirectory}/Música";
+      pictures = "${config.home.homeDirectory}/Imágenes";
       videos = "${config.home.homeDirectory}/Videos";
+      download = "${config.home.homeDirectory}/Descargas";
     };
   };
 

@@ -9,6 +9,7 @@ nixpkgs.lib.nixosSystem rec {
 
     {
       home-manager = {
+        backupFileExtension = "backup";
         sharedModules = [ ];
         users.humbe = nixpkgs.lib.mkMerge [ ../users ];
       };
@@ -155,13 +156,6 @@ nixpkgs.lib.nixosSystem rec {
           libnotify 
         
           firefox
-
-          noto-fonts-cjk-sans
-          noto-fonts-cjk-serif
-          noto-fonts-color-emoji
-
-          corefonts
-          vista-fonts 
         ];
       };
 

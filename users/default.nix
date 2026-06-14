@@ -108,14 +108,6 @@ in
   };
 
   services = {
-   /* mpd = {
-      enable = true;
-      musicDirectory = config.xdg.userDirs.music;
-      playlistDirectory = "${config.home.homeDirectory}/.config/mpd/playlists";
-      dataDir = "${config.home.homeDirectory}/.config/mpd";
-      extraConfig = import ./config/mpd.nix { };
-    }; */
-
     mopidy = {
       enable = true;
 

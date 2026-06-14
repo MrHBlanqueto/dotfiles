@@ -24,6 +24,7 @@ nixpkgs.lib.nixosSystem rec {
       imports = [
         ./libs/interface.nix
         ./libs/systemd.nix
+        ./libs/fonts.nix
         ../hardware-configuration.nix
       ];
 
@@ -142,24 +143,27 @@ nixpkgs.lib.nixosSystem rec {
         };
       };
 
-      environment.systemPackages = with pkgs; [
-        git 
-        wget 
-        curl 
+      environment = {
+        binsh = "${pkgs.dash}/bin/dash";
+        systemPackages = with pkgs; [
+          git 
+          wget 
+          curl 
         
-        polkit_gnome 
-        gsettings-desktop-schemas 
-        libnotify 
+          polkit_gnome 
+          gsettings-desktop-schemas 
+          libnotify 
         
-        firefox
+          firefox
 
-        noto-fonts-cjk-sans
-        noto-fonts-cjk-serif
-        noto-fonts-color-emoji
+          noto-fonts-cjk-sans
+          noto-fonts-cjk-serif
+          noto-fonts-color-emoji
 
-        corefonts
-        vista-fonts 
-      ];
+          corefonts
+          vista-fonts 
+        ];
+      };
 
       nixpkgs.config.allowUnfree = true;
 

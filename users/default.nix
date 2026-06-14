@@ -40,15 +40,9 @@
     
       fastfetch
       eza
-
-      twitter-color-emoji
-      nerd-fonts.ubuntu-mono
-      nerd-fonts.ubuntu-sans
-      nerd-fonts.fira-code
-      victor-mono
       
       ffmpeg
-      mpc
+      ueberzugpp
       python3
 
       # x86_64
@@ -114,14 +108,13 @@
         set -g fish_color_command --bold green""'';
 
       shellAliases = {
-        delgen = "sudo nix-env -p /nix/var/nix/profiles/system --delete-generations old && nix-env --delete-generations old && sudo nix-store --gc";
+        delgen = "sudo nix-collect-garbage --delete-older-than 1d && sudo nix-store --gc && sudo nix-env --profile /nix/var/nix/profiles/system --delete-generations old";
         nix-update = "sudo nixos-rebuild switch";
         flake-update-rb = "sudo nixos-rebuild boot --flake .#NixOS --impure";
         flake-update-sw = "sudo nixos-rebuild switch --flake .#NixOS --impure";
 
         g = "git";
         c = "clear";
-
 
         ls = "eza --color=auto --icons";
         l = "ls -l";
@@ -141,7 +134,28 @@
     };
   };
 
+  services = {
+    mpd = {
+      enable = true;
+      package = pkgs.mpd;
+      musicDirectory = config.xdg.userDirs.music;
+      extraConfig = import ./config/mpd.nix { };
+    };
+  };
+
   fonts.fontconfig.enable = true;
+
+  xdg = {
+    enable = true;
+
+    userDirs = {
+      enable = true;
+      documents = "${config.home.homeDirectory}/Documents";
+      music = "${config.home.homeDirectory}/Music";
+      pictures = "${config.home.homeDirectory}/Pictures";
+      videos = "${config.home.homeDirectory}/Videos";
+    };
+  };
 
   nixpkgs.config = {
     allowUnfree = true;

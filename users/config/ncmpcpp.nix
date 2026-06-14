@@ -5,7 +5,7 @@
   services = {
     mpd = {
       enable = true;
-      musicDirectory = "${config.home.homeDirectory}/Música";
+      musicDirectory = config.xdg.userDirs.music;
       playlistDirectory = "${config.home.homeDirectory}/.config/mpd/playlists";
       dataDir = "${config.home.homeDirectory}/.config/mpd";
   
@@ -29,6 +29,7 @@
       enable = true;
       package = pkgs.ncmpcpp.override { visualizerSupport = true; };
       settings = {
+        execute_on_song_change = "~/Música/ncmpcpp-cover_arch.sh";
         ncmpcpp_directory = "${config.home.homeDirectory}/.config/ncmpcpp";
         lyrics_directory = "${config.home.homeDirectory}/.config/ncmpcpp/lyrics";
         mpd_host = "127.0.0.1";
@@ -73,7 +74,9 @@
         window_border_color = "black";
         active_window_border = "black";
 
-        song_status_format = "$5[ %a ] %b - %t";
+        #song_status_format = "$5[ %a ] %b - %t";
+        song_status_format = "$5 { %b }|{ %t }|{ %f }";
+
         song_columns_list_format = "(53)[white]{tr} (45)[white]{a}";
         song_library_format = "{{%a - %t} (%b)}|{%f}";
 

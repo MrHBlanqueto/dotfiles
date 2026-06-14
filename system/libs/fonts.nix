@@ -4,7 +4,7 @@
     fontDir.enable = true;
     enableGhostscriptFonts = true;
 
-    fonts = with pkgs; [
+    packages = with pkgs; [
       cantarell-fonts
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif

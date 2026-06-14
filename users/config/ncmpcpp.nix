@@ -1,20 +1,13 @@
-{ config, pkgs, ... }:
-
 {
-  programs = {
-    ncmpcpp = {
-      enable = true;
-      package = pkgs.ncmpcpp.override { visualizerSupport = true; };
-      settings = {
         #execute_on_song_change = " ";
-        ncmpcpp_directory = "${config.home.homeDirectory}/.config/ncmpcpp";
-        lyrics_directory = "${config.home.homeDirectory}/.config/ncmpcpp/lyrics";
+        ncmpcpp_directory = "~/.config/ncmpcpp";
+        lyrics_directory = "~/.config/ncmpcpp/lyrics";
         mpd_host = "127.0.0.1";
         mpd_port = 6600; 
         mpd_connection_timeout = 60;
     
-        visualizer_data_source = "/tmp/mpd.fifo";
-        visualizer_output_name = "my_fifo";
+        visualizer_data_source = "127.0.0.1:5555";
+        visualizer_output_name = "Mopidy UDP";
         visualizer_in_stereo = "yes";
         visualizer_type = "ellipse"; 
         visualizer_fps = "30";
@@ -33,7 +26,6 @@
         header_window_color = "default";
         alternative_ui_separator_color = "default";
         titles_visibility = "no";
-
 
         ask_before_clearing_playlists = "no";
         ask_for_locked_screen_width_part = "yes";
@@ -59,7 +51,4 @@
         now_playing_suffix = "  $/b$8";
         current_item_prefix = "$b$5$/b$3 ";
         current_item_suffix = "  $4";
-      };
-    };
-  };
 }

@@ -5,10 +5,6 @@ let
 in
 
 {
-  imports = [
-    ./config/ncmpcpp.nix
-  ];
-
   home = {
     username = "humbe";
     homeDirectory = "/home/humbe";
@@ -59,36 +55,12 @@ in
 
     yazi = {
       enable = true;
+    };
 
-      settings = {
-        yazi = {
-          ratio = [ 1 4 3 ];
-          sort_by = "natural";
-          sort_sensitive = true;
-          sort_reverse = false;
-          sort_dir_first = true;
-          linemode = "none";
-          show_hidden = true;
-          show_symlink = true;
-        };
-
-      preview = {
-        image_preview_protocol = "iterm2"; 
-      
-        image_filter = "lanczos3";
-          image_quality = 90;
-          tab_size = 1;
-          max_width = 600;
-          max_height = 900;
-          cache_dir = "";
-      };
-
-      tasks = {
-        micro_workers = 5;
-        macro_workers = 10;
-        bizarre_retry = 5;
-        };
-      };
+    ncmpcpp = {
+      enable = true;
+      package = pkgs.ncmpcpp.override { visualizerSupport = true; };
+      settings = import ./config/ncmpcpp.nix;
     };
 
     bat = {
@@ -136,13 +108,23 @@ in
   };
 
   services = {
-    mpd = {
+   /* mpd = {
       enable = true;
-      package = pkgs.mpd;
       musicDirectory = config.xdg.userDirs.music;
       playlistDirectory = "${config.home.homeDirectory}/.config/mpd/playlists";
       dataDir = "${config.home.homeDirectory}/.config/mpd";
       extraConfig = import ./config/mpd.nix { };
+    }; */
+
+    mopidy = {
+      enable = true;
+
+      extensionPackages = with pkgs; [
+        mopidy-local
+        mopidy-mpd
+      ];
+
+      settings = import ./config/mopidy.nix { };
     };
   };
 

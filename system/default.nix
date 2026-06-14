@@ -126,9 +126,9 @@ nixpkgs.lib.nixosSystem rec {
         ];
         files = [
           "/etc/machine-id"
-          "/etc/shadow"
-          "/etc/passwd"
-          "/etc/group"
+          #"/etc/shadow"
+          #"/etc/passwd"
+          #"/etc/group"
         ];
       };
 
